@@ -16,8 +16,8 @@ public class view extends javax.swing.JFrame {
     private final Prato naoMassa = new Prato("Bolo de Chocolate","");
     
     //LISTS
-    private ListPratos pratosMassa = new ListPratos();
-    private ListPratos pratosNaoMassa = new ListPratos();
+    private final ListPratos pratosMassa = new ListPratos();
+    private final ListPratos pratosNaoMassa = new ListPratos();
     
     //VARIAVEIS GLOBAIS
     private int resposta;
@@ -111,15 +111,17 @@ public class view extends javax.swing.JFrame {
 
         if (resposta == JOptionPane.YES_OPTION) {
             advinharPratos(pratosMassa);
-        } else if (resposta == JOptionPane.NO_OPTION) {
-            advinharPratos(pratosNaoMassa);
+            return;
         }
+        
+        advinharPratos(pratosNaoMassa);        
     }
     
     private void advinharPratos(ListPratos pratos) {
         int contador;
+        int tamanhoList = pratos.getPratos().size() - 1;
 
-        for (contador = pratos.getPratos().size() - 1; contador > 0; contador--) {
+        for (contador = tamanhoList; contador > 0; contador--) {
             resposta = perguntaPrato(pratos, contador, true);
 
             if (resposta == JOptionPane.YES_OPTION) {
@@ -138,20 +140,15 @@ public class view extends javax.swing.JFrame {
             resposta = perguntaPrato(pratos, contador, false);
             if (resposta == JOptionPane.YES_OPTION) {
                 acertei();
-            } else if (resposta == JOptionPane.NO_OPTION) {
-                adicionarPrato(pratos, contador);
+                return;
             }
+            
+            adicionarPrato(pratos, contador);            
         }
     }
     
-    private void adicionarPrato(ListPratos pratos, int ordemPrato) {
-        String descricaoPrato;
-        String caracteristicaPrato;
-
-        descricaoPrato = JOptionPane.showInputDialog(rootPane, "Qual prato você pensou ?", "Desisto", JOptionPane.QUESTION_MESSAGE);
-        caracteristicaPrato = JOptionPane.showInputDialog(rootPane, descricaoPrato.concat(" é ________ mas ").concat(pratos.getPratos().get(ordemPrato).getDescricao()).concat(" não."), "Complete", JOptionPane.QUESTION_MESSAGE);
-        
-        pratos.getPratos().add(new Prato(descricaoPrato, caracteristicaPrato));
+    private void adicionarPrato(ListPratos pratos, int ordemPrato) {                
+        pratos.getPratos().add(montaObjetoPratoNovo(pratos, ordemPrato));
     }
     
     private void acertei() {
@@ -164,5 +161,14 @@ public class view extends javax.swing.JFrame {
         }
         
         return JOptionPane.showConfirmDialog(rootPane, "O prato que pensou é ".concat(pratos.getPratos().get(contador).getDescricao()).concat(" ?"), "Confirm", JOptionPane.YES_NO_OPTION);
+    }
+    
+    private Prato montaObjetoPratoNovo(ListPratos pratos, int ordemPrato) {
+        String descricaoPrato = JOptionPane.showInputDialog(rootPane, "Qual prato você pensou ?", "Desisto", JOptionPane.QUESTION_MESSAGE);
+        String caracteristicaPrato = JOptionPane.showInputDialog(rootPane, descricaoPrato.concat(" é ________ mas ").concat(pratos.getPratos().get(ordemPrato).getDescricao()).concat(" não."), "Complete", JOptionPane.QUESTION_MESSAGE);
+        
+        Prato prato = new Prato(descricaoPrato, caracteristicaPrato);
+                
+        return prato;        
     }
 }
