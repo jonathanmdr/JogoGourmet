@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class ListPratos {
     
-    public List<Prato> pratos = new ArrayList<>();
+    private List<Prato> pratos = new ArrayList<>();
 
     public List<Prato> getPratos() {
         return pratos;

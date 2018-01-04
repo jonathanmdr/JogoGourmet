@@ -28,8 +28,8 @@ public class view extends javax.swing.JFrame {
     public view() {        
         initComponents();
                       
-        this.pratosMassa.pratos.add(massa);
-        this.pratosNaoMassa.pratos.add(naoMassa);
+        this.pratosMassa.getPratos().add(massa);
+        this.pratosNaoMassa.getPratos().add(naoMassa);
     }
 
     @SuppressWarnings("unchecked")
