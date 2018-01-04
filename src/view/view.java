@@ -110,9 +110,9 @@ public class view extends javax.swing.JFrame {
         resposta = JOptionPane.showConfirmDialog(rootPane, "O prato que você pensou é massa ?", "Confirm", JOptionPane.YES_NO_OPTION);
 
         if (resposta == JOptionPane.YES_OPTION) {
-            advinharPratos((ListPratos) pratosMassa);
+            advinharPratos(pratosMassa);
         } else if (resposta == JOptionPane.NO_OPTION) {
-            advinharPratos((ListPratos) pratosNaoMassa);
+            advinharPratos(pratosNaoMassa);
         }
     }
     
