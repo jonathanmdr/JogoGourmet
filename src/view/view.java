@@ -103,7 +103,7 @@ public class view extends javax.swing.JFrame {
             System.out.println("Erro ao carregar LookAndFeel");
         }
 
-        /*Intânciando a view e apresentando a mesma*/
+        /*Instânciando a view e apresentando a mesma*/
         java.awt.EventQueue.invokeLater(() -> {
             new view().setVisible(true);
         });
